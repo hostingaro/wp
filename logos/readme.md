@@ -1,1 +1,1 @@
-<h1>Logod</h1>
+<h1>Logos</h1>
