@@ -105,9 +105,15 @@ if ( !defined('ABSPATH') )
 
 /* Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');";
+
 rename($path.'/wp-content', $path.'/static');
 rename($path.'/static/plugins', $path.'/static/modules');
 change_perfix($connection,$perfix,"wp_");
+
+$php_file = fopen($path.'/wp-config.php',"w");
+write($php_file,$config);
+fclose($file);
+
 }
 
 if (empty($path) || !is_dir($path)) {
@@ -129,7 +135,6 @@ if (empty($path) || !is_dir($path)) {
             	        if ($mysqli->query("UPDATE wp_users SET user_url='".$wpsite_url."' WHERE user_login='".$wpusername."';") === TRUE) {
             	        	$security = array('AUTH_KEY' => AUTH_KEY, 'SECURE_AUTH_KEY' => SECURE_AUTH_KEY, 'LOGGED_IN_KEY' => LOGGED_IN_KEY, 'NONCE_KEY' => NONCE_KEY, 'AUTH_SALT' => AUTH_SALT, 'SECURE_AUTH_SALT' => SECURE_AUTH_SALT, 'LOGGED_IN_SALT' => LOGGED_IN_SALT, 'NONCE_SALT' => NONCE_SALT);
             	        	security_wp_(DB_NAME,DB_USER,DB_PASSWORD,DB_HOST,$security,$wpsite_url,$mysqli);
-
             	        	exit("Happy Blogging ");
             	        } else {
             	        	exit($mysqli->error);
