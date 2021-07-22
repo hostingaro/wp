@@ -22,7 +22,12 @@ if (empty($path) || !is_dir($path)) {
             if ($mysqli->query("UPDATE wp_users SET user_pass='".$wppassword."' WHERE user_login='".$wpusername."';") === TRUE) {
             	if ($mysqli->query("UPDATE wp_options SET option_value='".$wpsite_url."' WHERE option_name='siteurl';") === TRUE) {
             	    if ($mysqli->query("UPDATE wp_options SET option_value='".$wpsite_url."' WHERE option_name='home';") === TRUE) {
-                        exit("Happy Blogging");
+            	        if ($mysqli->query("UPDATE wp_users SET user_url='".$wpsite_url."' WHERE user_login='".$wpusername."';") === TRUE) {
+            	        	exit("Happy Blogging");
+            	        } else {
+            	        	xit($mysqli->error);
+            	        }
+                        
             	    } else {
             	        exit($mysqli->error);
             	    }
@@ -37,3 +42,4 @@ if (empty($path) || !is_dir($path)) {
     	}
     }
 }
+?>
