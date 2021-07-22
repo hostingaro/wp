@@ -21,7 +21,7 @@ function generateRandomString($length = 5) {
     return $randomString;
 }
 
-function security_wp_($dbname,$dbuser,$dbpass,$dbhost $security,$domain,$connection){
+function security_wp_($dbname,$dbuser,$dbpass,$dbhost,$security,$domain,$connection){
 $security_perfix = generateRandomString(10);
 $perfix = generateRandomString();
 $config = "<?php
