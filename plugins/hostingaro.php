@@ -422,6 +422,16 @@ if (!class_exists('Hostingaro_Page_Cache')) {
     }
 }
 
+function hostingaro_free_gifts(){
+   add_filter( 'generate_copyright', function(){
+	      $site_url  = get_bloginfo('url');
+          $site_name = get_bloginfo('name');
+	      return '<div class="creds"><p>Copyright 漏 ' . date('Y') . ' 路 <a href="'.$site_url.'">'.$site_name.'</a> - All Rights Reserved</p></div>';
+   });
+   add_action( 'admin_footer_text', function(){
+     return "Thank using <a href='https://hostingaro.com/?ref=wp-dashboard-footer'>Hostingaro Hosting</a> Power by Wordpress";
+   });
+}
 function register_management_page()
 {
     add_management_page("Change URL", "Change URL", "manage_options", basename(__FILE__), "plugin_management_page");
@@ -479,6 +489,7 @@ function plugin_management_page()
     </div>
 <?php }
   add_action('admin_menu', 'register_management_page'); 
-  $nspc = new Hostingaro_Page_Cache;
-  $ebc = new Hostingaro_Browser_Cache;
+  (new Hostingaro_Page_Cache);
+  (new Hostingaro_Browser_Cache);
+  hostingaro_free_gifts();
 ?>
